@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Booking</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+   <!-- Custom CSS -->
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Ticket Reservation</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="booking.html">Booking</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="payment.html">Payment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Login
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="login.html">Login</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="signup.html">Sign Up</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container mt-5">
+        <h2>Ticket Booking</h2>
+        <form id="bookingForm">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="fromLocation">From:</label>
+                    <input type="text" class="form-control" id="fromLocation" placeholder="Enter departure location">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="toLocation">To:</label>
+                    <input type="text" class="form-control" id="toLocation" placeholder="Enter destination location">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="travelDate">Travel Date:</label>
+                    <input type="date" class="form-control" id="travelDate">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="passengers">Number of Passengers:</label>
+                    <input type="number" class="form-control" id="passengers" min="1" value="1">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="trainId">Train ID:</label>
+                <input type="text" class="form-control" id="trainId" placeholder="Enter Train ID">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        <div id="searchResults" class="mt-4">
+            <!-- Search results will be displayed here -->
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <button id="sleeperButton" class="btn btn-primary col-6 col-md-3">Show Sl Trains</button>
+            <button id="acButton" class="btn btn btn-success col-6 col-md-3">Show AC Trains</button>
+            <button id="firstACButton" class="btn btn-info col-6 col-md-3">Show 1A Trains</button>
+            <button id="secondACButton" class="btn btn-warning col-6 col-md-3">Show 2A Trains</button>
+            <button id="localButton" class="btn btn-dark col-6 col-md-6">Show Local Trains</button>
+            <button id="overnightButton" class="btn btn-secondary col-6 col-md-6">Show Overnight Express Trains</button>
+        </div>
+        <div id="trainCards" class="mt-4">
+            <!-- Train cards will be displayed here -->
+        </div>
+    </div>
+   <footer class="footer bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <p>Email: info@example.com</p>
+                    <p>Phone: +1 123-456-7890</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Follow Us</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Subscribe to Our Newsletter</h5>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Load all trains initially
+            loadTrains();
+
+            // Button click event to filter sleeper trains
+            $('#sleeperButton').click(function() {
+                filterTrainsByCategory('sleeper');
+            });
+
+            // Button click event to filter AC trains
+            $('#acButton').click(function() {
+                filterTrainsByCategory('AC');
+            });
+
+            // Button click event to filter 1A trains
+            $('#firstACButton').click(function() {
+                filterTrainsByCategory('1A');
+            });
+
+            // Button click event to filter 2A trains
+            $('#secondACButton').click(function() {
+                filterTrainsByCategory('2A');
+            });
+
+            // Button click event to filter Local trains
+            $('#localButton').click(function() {
+                filterTrainsByCategory('local');
+            });
+
+            // Button click event to filter Overnight Express trains
+            $('#overnightButton').click(function() {
+                filterTrainsByCategory('over');
+            });
+
+            // Form submit event for searching trains
+            $('#bookingForm').submit(function(event) {
+                event.preventDefault();
+                var trainId = $('#trainId').val().trim();
+                if (trainId !== '') {
+                    searchTrain(trainId);
+                } else {
+                    loadTrains();
+                }
+            });
+
+            // Function to load all trains
+            function loadTrains() {
+                $.getJSON('trains.json', function(data) {
+                    displayTrains(data);
+                });
+            }
+
+            // Function to filter trains by category
+            function filterTrainsByCategory(category) {
+                $.getJSON('trains.json', function(data) {
+                    var filteredTrains = data.filter(function(train) {
+                        return train.category === category;
+                    });
+                    displayTrains(filteredTrains);
+                });
+            }
+
+            // Function to search for a specific train by ID
+            function searchTrain(trainId) {
+        $.getJSON('trains.json', function(data) {
+            var searchedTrain = data.find(function(train) {
+                return train.id === trainId;
+            });
+            if (searchedTrain) {
+                displayTrains([searchedTrain]);
+            } else {
+                $('#trainCards').text('Train not found.');
+            }
+        });
+    }
+
+            // Function to display trains
+            function displayTrains(trains) {
+                var trainCardsDiv = $('#trainCards');
+                trainCardsDiv.empty();
+
+                if (trains.length > 0) {
+                    var cardContainer = $('<div class="card-columns"></div>');
+
+                    trains.forEach(function(train) {
+                        var card = $('<div class="card"></div>');
+                        var cardBody = $('<div class="card-body"></div>');
+                        var cardTitle = $('<h5 class="card-title"></h5>').text('Train ID: ' + train.id);
+                        var cardText = $('<p class="card-text"></p>').text('Train Name: ' + train.name);
+                        var bookButton = $('<button class="btn btn-primary book-btn">Book Now</button>');
+
+                        // Click event to redirect to payment page with train information
+                        bookButton.click(function() {
+                            window.location.href = 'payment.html?trainId=' + train.id + '&trainName=' + encodeURIComponent(train.name);
+                        });
+
+                        cardBody.append(cardTitle, cardText, bookButton);
+                        card.append(cardBody);
+                        cardContainer.append(card);
+                    });
+
+                    trainCardsDiv.append(cardContainer);
+                } else {
+                    trainCardsDiv.text('No trains found.');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+      <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .payment-img {
+            height: 150px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Ticket Reservation</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="booking.html">Booking</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="payment.html">Payment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Login
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="login.html">Login</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="signup.html">Sign Up</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="text-center">Payment</h2>
+        <div class="row">
+            <div class="col-md-6 col-12">
+                <img src="img/tiicket 3.jpg" class="img-fluid " alt="Payment Image">
+            </div>
+            <div class="col-md-6">
+                <form id="paymentForm">
+                    <div class="form-group">
+                        <label for="ticketType">Ticket Type:</label>
+                        <select class="form-control" id="ticketType">
+                            <option value="" selected disabled>Select Ticket Type</option>
+                            <option value="standard">Standard</option>
+                            <option value="firstClass">First Class</option>
+                            <option value="business">Business</option>
+                        </select>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" class="form-control" id="quantity" min="1" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="totalPrice">Total Price:</label>
+                        <input type="text" class="form-control" id="totalPrice" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="paymentMethod">Payment Method:</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="cashOnDelivery" value="cashOnDelivery">
+                            <label class="form-check-label" for="cashOnDelivery">
+                                Cash on Delivery
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="debitCard" value="debitCard">
+                            <label class="form-check-label" for="debitCard">
+                                Debit Card
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="netBanking" value="netBanking">
+                            <label class="form-check-label" for="netBanking">
+                                Net Banking
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Proceed to Pay</button>
+                </form>
+            </div>
+        </div>
+    </div>
+   <footer class="footer bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <p>Email: info@example.com</p>
+                    <p>Phone: +1 123-456-7890</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Follow Us</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Subscribe to Our Newsletter</h5>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Custom Script -->
+    <script>
+        $(document).ready(function() {
+            // Calculate total price based on ticket type and quantity
+            $('#ticketType, #quantity').change(function() {
+                var ticketType = $('#ticketType').val();
+                var quantity = $('#quantity').val();
+                var totalPrice;
+
+                // Calculate total price based on ticket type and quantity
+                if (ticketType === 'standard') {
+                    totalPrice = quantity * 50; // Assuming $50 for standard ticket
+                } else if (ticketType === 'firstClass') {
+                    totalPrice = quantity * 100; // Assuming $100 for first class ticket
+                } else if (ticketType === 'business') {
+                    totalPrice = quantity * 150; // Assuming $150 for business class ticket
+                }
+
+                // Update total price input field
+                $('#totalPrice').val('$' + totalPrice.toFixed(2));
+            });
+
+            // Handle form submission
+            $('#paymentForm').submit(function(event) {
+                event.preventDefault();
+                // Here you can handle payment processing logic based on the selected payment method
+                var paymentMethod = $('input[name="paymentMethod"]:checked').val();
+                if (paymentMethod === 'cashOnDelivery') {
+                    alert('Your order will be delivered soon! Please keep cash ready for payment.');
+                } else if (paymentMethod === 'debitCard') {
+                    alert('Redirecting to Debit Card payment gateway...');
+                    // Implement Debit Card payment processing logic
+                } else if (paymentMethod === 'netBanking') {
+                    alert('Redirecting to Net Banking payment gateway...');
+                    // Implement Net Banking payment processing logic
+                }
+            });
+        });
+    </script>
+    <!-- Inside the script tag in the payment.html file -->
+<script>
+    $(document).ready(function() {
+        // Function to parse URL parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Function to display selected train information
+        function displaySelectedTrainInfo() {
+            var trainId = getUrlParameter('trainId');
+            var trainName = getUrlParameter('trainName');
+
+            if (trainId && trainName) {
+                var selectedTrainInfo = $('#selectedTrainInfo');
+                selectedTrainInfo.append('<p>Train ID: ' + trainId + '</p>');
+                selectedTrainInfo.append('<p>Train Name: ' + trainName + '</p>');
+            } else {
+                $('#selectedTrainInfo').text('No train information available.');
+            }
+        }
+
+        // Display selected train information when the page loads
+        displaySelectedTrainInfo();
+
+        // Other existing code...
+    });
+</script>
+
+</body>
+</html>

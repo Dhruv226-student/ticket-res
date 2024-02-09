@@ -1,0 +1,22 @@
+[
+    {"id": "001", "name": "Sleeper Express 1", "category": "sleeper"},
+    {"id": "002", "name": "Sleeper Express 2", "category": "sleeper"},
+    {"id": "003", "name": "Sleeper Express 3", "category": "sleeper"},
+    {"id": "004", "name": "AC Express 1", "category": "AC"},
+    {"id": "005", "name": "AC Express 2", "category": "AC"},
+    {"id": "006", "name": "1A Express 1", "category": "1A"},
+    {"id": "007", "name": "1A Express 2", "category": "1A"},
+    {"id": "008", "name": "2A Express 1", "category": "2A"},
+    {"id": "009", "name": "2A Express 2", "category": "2A"},
+    {"id": "010", "name": "Overnight Express 1", "category": "over"},
+    {"id": "011", "name": "Overnight Express 2", "category": "over"},
+    {"id": "012", "name": "Overnight Express 3", "category": "over"},
+    {"id": "013", "name": "Local Train 1", "category": "local"},
+    {"id": "014", "name": "Local Train 2", "category": "local"},
+    {"id": "015", "name": "Local Train 3", "category": "local"},
+    {"id": "016", "name": "Local Train 4", "category": "local"},
+    {"id": "017", "name": "Local Train 5", "category": "local"},
+    {"id": "018", "name": "Local Train 6", "category": "local"},
+    {"id": "019", "name": "Local Train 7", "category": "local"},
+    {"id": "020", "name": "Local Train 8", "category": "local"}
+]
